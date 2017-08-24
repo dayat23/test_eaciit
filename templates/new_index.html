@@ -1,0 +1,36 @@
+{% extends 'new_base.html' %}
+
+{% block content %}
+<div id="grid" style="width: 100%; height: 250px;"></div>
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript">
+	$(document).ready(function(){
+		var gridData = {{ reader|safe }};
+		
+		$('#grid').w2grid({
+			name: 'grid',
+			header: 'List of Names',
+			show: {
+				toolbar: true,
+				footer: true
+			},
+			columns: [
+				{ field: "CMGGlobalBU", caption: "Company Name", type: "text", size: '200px', validate: "required", filterable: true },
+	            { field: "ClientTier", caption: "Client Tier", type: "text", size: '150px' },
+	            { field: "CMGSegmentName", caption: "Segment Name", type: "text", size: '200px' },
+	            { field: "GlobalControlPoint", caption: "Global Control Point", type: "text", size: '200px' },
+	            { field: "REVENUE FY14", caption: "Revenue 2014", type: "number", size: '200px' },
+	            { field: "REVENYE FY15X", caption: "Revenue 2015", type: "number", size: '200px' },
+	            { field: " Deposits_EOP_FY14", caption: "Deposits 2014", type: "number", size: '200px' },
+	            { field: " Deposits_EOP_FY15x", caption: "Deposits 2015", type: "number", size: '200px' },
+	            { field: "ROE FY14", caption: "ROE 2014", type: "number", size: '200px' },
+	            { field: "ROE FY15", caption: "ROE 2015", type: "number", size: '200px' },
+			],
+			sortData: [{ field: 'CMGGlobalBU', direction: 'ASC' }],
+			records: gridData
+		});
+	})
+</script>
+{% endblock %}

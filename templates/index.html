@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+
+	<!-- Nav tabs -->
+	<ul class="nav nav-tabs" role="tablist" style="margin-bottom: 15px;">
+		<li role="presentation" class="active"><a href="#grid2014" aria-controls="grid2014" role="tab" data-toggle="tab">2014</a></li>
+		<li role="presentation"><a href="#grid2015" aria-controls="grid2015" role="tab" data-toggle="tab">2015</a></li>
+	</ul>
+
+	<!-- Tab panes -->
+	<div class="tab-content">
+		<div role="tabpanel" class="tab-pane active" id="grid2014">
+			<div id="jsGrid2014"></div>
+		</div>
+		<div role="tabpanel" class="tab-pane" id="grid2015">
+			<div id="jsGrid2015"></div>
+		</div>
+	</div>
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript">
+	var gridData = {{ reader|safe }};
+ 
+    $("#jsGrid2014").jsGrid({
+        width: "100%",
+ 
+ 		filtering: true,
+        sorting: true,
+        paging: true,
+        autoload: true,
+        ignoreCase: true,
+
+        pageSize: 50,
+        pageButtonCount: 5,
+ 
+        fields: [
+            { name: "CMGGlobalBU", title: "Company Name",
+            	itemTemplate: function(value){
+            		var company_url = "/company/" + value.toLowerCase().replace(/ /g,'-').replace(/&/g, 'and').replace(/[^\w-]+/g,'');
+            		return $("<a>").attr("href", company_url).text(value);
+            	}, type: "text", width: 200, validate: "required", filterable: true },
+            { name: "ClientTier", title: "Client Tier", type: "text", width: 150 },
+            { name: "CMGSegmentName", title: "Segment Name", type: "text", width: 200 },
+            { name: "GlobalControlPoint", title: "Global Control Point", type: "text", width: 200 },
+            { name: "REVENUE FY14", title: "Revenue 2014", type: "number", width: 200, filtering: false },
+            { name: " Deposits_EOP_FY14", title: "Deposits 2014", type: "number", width: 200 , filtering: false},
+            { name: "ROE FY14", title: "ROE 2014", type: "number", width: 200, filtering: false },
+        ],
+        controller: {
+            data: gridData,
+            loadData: function (filter) {
+                return $.grep(this.data, function (item) {
+                    return (!filter.CMGGlobalBU || item.CMGGlobalBU.toLowerCase().indexOf(filter.CMGGlobalBU.toLowerCase()) > -1) && (!filter.ClientTier || item.ClientTier.toLowerCase().indexOf(filter.ClientTier.toLowerCase()) > -1) && (!filter.CMGSegmentName || item.CMGSegmentName.toLowerCase().indexOf(filter.CMGSegmentName.toLowerCase()) > -1) && (!filter.GlobalControlPoint || item.GlobalControlPoint.toLowerCase().indexOf(filter.GlobalControlPoint.toLowerCase()) > -1);
+                });
+            },          
+        }
+    });
+
+    $("#jsGrid2015").jsGrid({
+        width: "100%",
+ 
+ 		filtering: true,
+        sorting: true,
+        paging: true,
+        autoload: true,
+        ignoreCase: true,
+
+        pageSize: 50,
+        pageButtonCount: 5,
+ 
+        fields: [
+            { name: "CMGGlobalBU", title: "Company Name",
+            	itemTemplate: function(value){
+            		var company_url = "/company/" + value.toLowerCase().replace(/ /g,'-').replace(/&/g, 'and').replace(/[^\w-]+/g,'');
+            		return $("<a>").attr("href", company_url).text(value);
+            	}, type: "text", width: 200, validate: "required", filterable: true },
+            { name: "ClientTier", title: "Client Tier", type: "text", width: 150 },
+            { name: "CMGSegmentName", title: "Segment Name", type: "text", width: 200 },
+            { name: "GlobalControlPoint", title: "Global Control Point", type: "text", width: 200 },
+            { name: "REVENYE FY15X", title: "Revenue 2015", type: "number", width: 200, filtering: false },
+            { name: " Deposits_EOP_FY15x", title: "Deposits 2015", type: "number", width: 200, filtering: false },
+            { name: "ROE FY15", title: "ROE 2015", type: "number", width: 200, filtering: false},
+        ],
+        controller: {
+            data: gridData,
+            loadData: function (filter) {
+                return $.grep(this.data, function (item) {
+                    return (!filter.CMGGlobalBU || item.CMGGlobalBU.toLowerCase().indexOf(filter.CMGGlobalBU.toLowerCase()) > -1) && (!filter.ClientTier || item.ClientTier.toLowerCase().indexOf(filter.ClientTier.toLowerCase()) > -1) && (!filter.CMGSegmentName || item.CMGSegmentName.toLowerCase().indexOf(filter.CMGSegmentName.toLowerCase()) > -1) && (!filter.GlobalControlPoint || item.GlobalControlPoint.toLowerCase().indexOf(filter.GlobalControlPoint.toLowerCase()) > -1);
+                });
+            },          
+        }
+    });
+</script>
+{% endblock %}

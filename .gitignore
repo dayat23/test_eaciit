@@ -1,0 +1,19 @@
+*.*~
+*.pyc
+*.tmp
+*.orig
+*.log
+*.DS_Store
+.idea/
+db.sqlite3
+logs/*
+
+# __pycache__
+__pycache__/*
+*/__pycache__/*
+
+# APP MIGRATIONS
+*/migrations/*
+
+# Upload File
+media/*
