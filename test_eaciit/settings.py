@@ -49,10 +49,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# MIDDLEWARE += (
-#     'django.middleware.cache.UpdateCacheMiddleware',
-#     'django.middleware.cache.FetchFromCacheMiddleware',
-# )
+MIDDLEWARE += (
+    'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
+)
 
 ROOT_URLCONF = 'test_eaciit.urls'
 
@@ -129,17 +129,18 @@ STATICFILES_DIRS = (
 
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
-# CACHES = {
-#     # 'default': {
-#     #     'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-#     #     'TIMEOUT': 300,
-#     # }
-#     # 'default': {
-#     #     'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
-#     #     'LOCATION': 'test_cache',
-#     # }
-#     # 'default': {
-#     #     'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-#     #     'LOCATION': '127.0.0.1:11211',
-#     # }
-# }
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'TIMEOUT': None,
+    }
+    # 'default': {
+    #     'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+    #     'LOCATION': 'test_cache',
+    #     'TIMEOUT': None
+    # }
+    # 'default': {
+    #     'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+    #     'LOCATION': '127.0.0.1:11211',
+    # }
+}
