@@ -123,3 +123,10 @@ STATICFILES_DIRS = (
 )
 
 ADMIN_MEDIA_PREFIX = '/static/admin/'
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'TIMEOUT': 300,
+    }
+}
