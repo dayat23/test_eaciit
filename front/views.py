@@ -9,7 +9,7 @@ import csv
 
 
 class HomeView(AjaxResponseMixin, TemplateView):
-	template_name = 'index.html'
+	template_name = 'new_index.html'
 
 	def get_context_data(self, **kwargs):
 		context = super(HomeView, self).get_context_data(**kwargs)
@@ -18,8 +18,20 @@ class HomeView(AjaxResponseMixin, TemplateView):
 		read_file = open(file_csv, encoding="ISO-8859-1")
 		reader = list(csv.DictReader(read_file))
 
+		data = []
+
+		index = 1
+		for i in reader:
+			i.update({
+				'recid': index
+			})
+
+			data.append(i)
+
+			index += 1
+
 		context.update({
-			'reader': reader
+			'reader': data
 		})
 
 		return context

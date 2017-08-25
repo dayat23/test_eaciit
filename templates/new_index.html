@@ -1,7 +1,7 @@
 {% extends 'new_base.html' %}
 
 {% block content %}
-<div id="grid" style="width: 100%; height: 250px;"></div>
+<div id="grid" style="width: 100%; height: 500px;"></div>
 {% endblock %}
 
 {% block extra_js %}
@@ -17,6 +17,7 @@
 				footer: true
 			},
 			columns: [
+				{ field: 'recid', caption: 'ID', size: '50px', sortable: true, attr: 'align=center' },
 				{ field: "CMGGlobalBU", caption: "Company Name", type: "text", size: '200px', validate: "required", filterable: true },
 	            { field: "ClientTier", caption: "Client Tier", type: "text", size: '150px' },
 	            { field: "CMGSegmentName", caption: "Segment Name", type: "text", size: '200px' },
