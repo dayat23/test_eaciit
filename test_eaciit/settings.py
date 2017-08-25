@@ -51,7 +51,6 @@ MIDDLEWARE = [
 
 MIDDLEWARE += (
     'django.middleware.cache.UpdateCacheMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
 )
 
@@ -130,13 +129,17 @@ STATICFILES_DIRS = (
 
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
-CACHES = {
-    # 'default': {
-    #     'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-    #     'TIMEOUT': 300,
-    # }
-    'default': {
-        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
-        'LOCATION': 'test_cache',
-    }
-}
+# CACHES = {
+#     # 'default': {
+#     #     'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+#     #     'TIMEOUT': 300,
+#     # }
+#     # 'default': {
+#     #     'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+#     #     'LOCATION': 'test_cache',
+#     # }
+#     # 'default': {
+#     #     'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+#     #     'LOCATION': '127.0.0.1:11211',
+#     # }
+# }
