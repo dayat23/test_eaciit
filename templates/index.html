@@ -39,7 +39,7 @@
         pageButtonCount: 5,
  
         fields: [
-            { name: "CMGGlobalBU", title: "Company Name",
+            { name: "CMGUnmaskedName", title: "Company Name",
             	itemTemplate: function(value){
             		var company_url = "/company/" + value.toLowerCase().replace(/ /g,'-').replace(/&/g, 'and').replace(/[^\w-]+/g,'');
             		return $("<a>").attr("href", company_url).text(value);
@@ -55,7 +55,7 @@
             data: gridData,
             loadData: function (filter) {
                 return $.grep(this.data, function (item) {
-                    return (!filter.CMGGlobalBU || item.CMGGlobalBU.toLowerCase().indexOf(filter.CMGGlobalBU.toLowerCase()) > -1) && (!filter.ClientTier || item.ClientTier.toLowerCase().indexOf(filter.ClientTier.toLowerCase()) > -1) && (!filter.CMGSegmentName || item.CMGSegmentName.toLowerCase().indexOf(filter.CMGSegmentName.toLowerCase()) > -1) && (!filter.GlobalControlPoint || item.GlobalControlPoint.toLowerCase().indexOf(filter.GlobalControlPoint.toLowerCase()) > -1);
+                    return (!filter.CMGUnmaskedName || item.CMGUnmaskedName.toLowerCase().indexOf(filter.CMGUnmaskedName.toLowerCase()) > -1) && (!filter.ClientTier || item.ClientTier.toLowerCase().indexOf(filter.ClientTier.toLowerCase()) > -1) && (!filter.CMGSegmentName || item.CMGSegmentName.toLowerCase().indexOf(filter.CMGSegmentName.toLowerCase()) > -1) && (!filter.GlobalControlPoint || item.GlobalControlPoint.toLowerCase().indexOf(filter.GlobalControlPoint.toLowerCase()) > -1);
                 });
             },          
         }
@@ -74,7 +74,7 @@
         pageButtonCount: 5,
  
         fields: [
-            { name: "CMGGlobalBU", title: "Company Name",
+            { name: "CMGUnmaskedName", title: "Company Name",
             	itemTemplate: function(value){
             		var company_url = "/company/" + value.toLowerCase().replace(/ /g,'-').replace(/&/g, 'and').replace(/[^\w-]+/g,'');
             		return $("<a>").attr("href", company_url).text(value);
@@ -90,7 +90,7 @@
             data: gridData,
             loadData: function (filter) {
                 return $.grep(this.data, function (item) {
-                    return (!filter.CMGGlobalBU || item.CMGGlobalBU.toLowerCase().indexOf(filter.CMGGlobalBU.toLowerCase()) > -1) && (!filter.ClientTier || item.ClientTier.toLowerCase().indexOf(filter.ClientTier.toLowerCase()) > -1) && (!filter.CMGSegmentName || item.CMGSegmentName.toLowerCase().indexOf(filter.CMGSegmentName.toLowerCase()) > -1) && (!filter.GlobalControlPoint || item.GlobalControlPoint.toLowerCase().indexOf(filter.GlobalControlPoint.toLowerCase()) > -1);
+                    return (!filter.CMGUnmaskedName || item.CMGUnmaskedName.toLowerCase().indexOf(filter.CMGUnmaskedName.toLowerCase()) > -1) && (!filter.ClientTier || item.ClientTier.toLowerCase().indexOf(filter.ClientTier.toLowerCase()) > -1) && (!filter.CMGSegmentName || item.CMGSegmentName.toLowerCase().indexOf(filter.CMGSegmentName.toLowerCase()) > -1) && (!filter.GlobalControlPoint || item.GlobalControlPoint.toLowerCase().indexOf(filter.GlobalControlPoint.toLowerCase()) > -1);
                 });
             },          
         }

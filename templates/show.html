@@ -1,7 +1,220 @@
 {% extends 'base.html' %}
+{% block extra_css %}
+<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+
+<style type="text/css">
+	#regulator_capital, #npat_allocate, #total_limit_eop, #revenue {
+		width		: 100%;
+		height		: 500px;
+		font-size	: 11px;
+	}
+</style>
+{% endblock %}
 
 {% block content %}
 <div>
-	<p>a</p>
+	<div class="col-md-6">
+		<h3>Regulator Capital</h3>
+		<div id="regulator_capital"></div>
+	</div>
+	<div class="col-md-6">
+		<h3>NPAT ALLOCATE EQ</h3>
+		<div id="npat_allocate"></div>
+	</div>
+
+	<div class="col-md-6">
+		<h3>Total Limit EOP</h3>
+		<div id="total_limit_eop"></div>
+	</div>
+	<div class="col-md-6">
+		<h3>Revenu</h3>
+		<div id="revenue"></div>
+	</div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="https://www.amcharts.com/lib/3/serial.js"></script>
+<script src="https://www.amcharts.com/lib/3/pie.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+
+<script type="text/javascript">
+	AmCharts.makeChart( "regulator_capital", {
+		"type": "serial",
+		"theme": "light",
+		"dataProvider": {{ data_regulator_capital|safe }},
+		"valueAxes": [{
+			"gridColor": "#FFFFFF",
+			"gridAlpha": 0.2,
+			"dashLength": 0
+		}],
+		"gridAboveGraphs": true,
+		"startDuration": 1,
+		"graphs": [{
+			"balloonText": "[[category]]: <b>[[value]]</b>",
+			"fillAlphas": 0.8,
+			"lineAlpha": 0.2,
+			"type": "column",
+			"valueField": "value"
+		}],
+		"chartCursor": {
+			"categoryBalloonEnabled": false,
+			"cursorAlpha": 0,
+			"zoomable": false
+		},
+		"categoryField": "tahun",
+		"categoryAxis": {
+			"gridPosition": "start",
+			"gridAlpha": 0,
+			"tickPosition": "start",
+			"tickLength": 20
+		},
+		"export": {
+			"enabled": false
+		}
+
+	});
+
+	AmCharts.makeChart( "npat_allocate", {
+		"type": "serial",
+		"theme": "light",
+		"dataProvider": {{ data_npat_alloc_eq|safe }},
+		"valueAxes": [{
+			"gridColor": "#FFFFFF",
+			"gridAlpha": 0.2,
+			"dashLength": 0
+		}],
+		"gridAboveGraphs": true,
+		"startDuration": 1,
+		"graphs": [{
+			"balloonText": "[[category]]: <b>[[value]]</b>",
+			"fillAlphas": 0.8,
+			"lineAlpha": 0.2,
+			"type": "column",
+			"valueField": "value"
+		}],
+		"chartCursor": {
+			"categoryBalloonEnabled": false,
+			"cursorAlpha": 0,
+			"zoomable": false
+		},
+		"categoryField": "tahun",
+		"categoryAxis": {
+			"gridPosition": "start",
+			"gridAlpha": 0,
+			"tickPosition": "start",
+			"tickLength": 20
+		},
+		"export": {
+			"enabled": false
+		}
+	});
+
+	AmCharts.makeChart( "npat_allocate", {
+		"type": "serial",
+		"theme": "light",
+		"dataProvider": {{ data_npat_alloc_eq|safe }},
+		"valueAxes": [{
+			"gridColor": "#FFFFFF",
+			"gridAlpha": 0.2,
+			"dashLength": 0
+		}],
+		"gridAboveGraphs": true,
+		"startDuration": 1,
+		"graphs": [{
+			"balloonText": "[[category]]: <b>[[value]]</b>",
+			"fillAlphas": 0.8,
+			"lineAlpha": 0.2,
+			"type": "column",
+			"valueField": "value"
+		}],
+		"chartCursor": {
+			"categoryBalloonEnabled": false,
+			"cursorAlpha": 0,
+			"zoomable": false
+		},
+		"categoryField": "tahun",
+		"categoryAxis": {
+			"gridPosition": "start",
+			"gridAlpha": 0,
+			"tickPosition": "start",
+			"tickLength": 20
+		},
+		"export": {
+			"enabled": false
+		}
+	});
+
+	AmCharts.makeChart( "total_limit_eop", {
+		"type": "serial",
+		"theme": "light",
+		"dataProvider": {{ data_total_limit_eop|safe }},
+		"valueAxes": [{
+			"gridColor": "#FFFFFF",
+			"gridAlpha": 0.2,
+			"dashLength": 0
+		}],
+		"gridAboveGraphs": true,
+		"startDuration": 1,
+		"graphs": [{
+			"balloonText": "[[category]]: <b>[[value]]</b>",
+			"fillAlphas": 0.8,
+			"lineAlpha": 0.2,
+			"type": "column",
+			"valueField": "value"
+		}],
+		"chartCursor": {
+			"categoryBalloonEnabled": false,
+			"cursorAlpha": 0,
+			"zoomable": false
+		},
+		"categoryField": "tahun",
+		"categoryAxis": {
+			"gridPosition": "start",
+			"gridAlpha": 0,
+			"tickPosition": "start",
+			"tickLength": 20
+		},
+		"export": {
+			"enabled": false
+		}
+	});
+
+	AmCharts.makeChart( "revenue", {
+		"type": "serial",
+		"theme": "light",
+		"dataProvider": {{ data_revenue|safe }},
+		"valueAxes": [{
+			"gridColor": "#FFFFFF",
+			"gridAlpha": 0.2,
+			"dashLength": 0
+		}],
+		"gridAboveGraphs": true,
+		"startDuration": 1,
+		"graphs": [{
+			"balloonText": "[[category]]: <b>[[value]]</b>",
+			"fillAlphas": 0.8,
+			"lineAlpha": 0.2,
+			"type": "column",
+			"valueField": "value"
+		}],
+		"chartCursor": {
+			"categoryBalloonEnabled": false,
+			"cursorAlpha": 0,
+			"zoomable": false
+		},
+		"categoryField": "tahun",
+		"categoryAxis": {
+			"gridPosition": "start",
+			"gridAlpha": 0,
+			"tickPosition": "start",
+			"tickLength": 20
+		},
+		"export": {
+			"enabled": false
+		}
+	});
+</script>
 {% endblock %}
