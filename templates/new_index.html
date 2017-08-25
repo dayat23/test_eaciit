@@ -1,4 +1,4 @@
-{% extends 'new_base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 <div id="grid" style="width: 100%; height: 500px;"></div>
@@ -16,9 +16,22 @@
 				toolbar: true,
 				footer: true
 			},
-			columns: [
+	        multiSearch: true,
+	        searches: [
+	            { field: 'CMGUnmaskedName', caption: 'Company Name', type: 'text' },
+	            { field: 'ClientTier', caption: 'Client Tier', type: 'text' },
+	            { field: 'CMGSegmentName', caption: 'Segment Name', type: 'text' },
+	            { field: 'GlobalControlPoint', caption: 'Global Control Point', type: 'text' }
+	        ],
+			columns: [ 
 				{ field: 'recid', caption: 'ID', size: '50px', sortable: true, attr: 'align=center' },
-				{ field: "CMGGlobalBU", caption: "Company Name", type: "text", size: '200px', validate: "required", filterable: true },
+				{ field: "CMGUnmaskedName", caption: "Company Name", type: "text", size: '200px', validate: "required", filterable: true,
+					render: function (record, index, column_index) {
+						var company_url = "/company/" + record.CMGUnmaskedName.toLowerCase().replace(/ /g,'-').replace(/&/g, 'and').replace(/[^\w-]+/g,'');
+	                    var html = '<a href="'+ company_url +'">'+ record.CMGUnmaskedName + '</a>';
+	                    return html;
+	                }
+				},
 	            { field: "ClientTier", caption: "Client Tier", type: "text", size: '150px' },
 	            { field: "CMGSegmentName", caption: "Segment Name", type: "text", size: '200px' },
 	            { field: "GlobalControlPoint", caption: "Global Control Point", type: "text", size: '200px' },
@@ -29,7 +42,7 @@
 	            { field: "ROE FY14", caption: "ROE 2014", type: "number", size: '200px' },
 	            { field: "ROE FY15", caption: "ROE 2015", type: "number", size: '200px' },
 			],
-			sortData: [{ field: 'CMGGlobalBU', direction: 'ASC' }],
+			sortData: [{ field: 'CMGUnmaskedName', direction: 'ASC' }],
 			records: gridData
 		});
 	})
