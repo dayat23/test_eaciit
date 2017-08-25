@@ -130,17 +130,13 @@ STATICFILES_DIRS = (
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 CACHES = {
+    # 'default': {
+    #     'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    #     'TIMEOUT': None,
+    # }
     'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'TIMEOUT': None,
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'test_cache',
+        'TIMEOUT': None
     }
-    # 'default': {
-    #     'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
-    #     'LOCATION': 'test_cache',
-    #     'TIMEOUT': None
-    # }
-    # 'default': {
-    #     'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-    #     'LOCATION': '127.0.0.1:11211',
-    # }
 }
