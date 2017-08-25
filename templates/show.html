@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block extra_css %}
 <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
 
@@ -27,18 +28,18 @@
 		<div id="total_limit_eop"></div>
 	</div>
 	<div class="col-md-6">
-		<h3>Revenu</h3>
+		<h3>Revenue</h3>
 		<div id="revenue"></div>
 	</div>
 </div>
 {% endblock %}
 
 {% block extra_js %}
-<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
-<script src="https://www.amcharts.com/lib/3/serial.js"></script>
-<script src="https://www.amcharts.com/lib/3/pie.js"></script>
-<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
-<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+<script src="{% static 'js/amcharts.js' %}" data-compress="true"></script>
+<script src="{% static 'js/serial.js' %}" data-compress="true"></script>
+<script src="{% static 'js/pie.js' %}" data-compress="true"></script>
+<script src="{% static 'js/export.min.js' %}" data-compress="true"></script>
+<script src="{% static 'js/light.js' %}" data-compress="true"></script>
 
 <script type="text/javascript">
 	AmCharts.makeChart( "regulator_capital", {
