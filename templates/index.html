@@ -24,76 +24,93 @@
 
 {% block extra_js %}
 <script type="text/javascript">
-	var gridData = {{ reader|safe }};
- 
-    $("#jsGrid2014").jsGrid({
-        width: "100%",
- 
- 		filtering: true,
-        sorting: true,
-        paging: true,
-        autoload: true,
-        ignoreCase: true,
+	// var gridData = {{ reader|safe }};
 
-        pageSize: 50,
-        pageButtonCount: 5,
- 
-        fields: [
-            { name: "CMGUnmaskedName", title: "Company Name",
-            	itemTemplate: function(value){
-            		var company_url = "/company/" + value.toLowerCase().replace(/ /g,'-').replace(/&/g, 'and').replace(/[^\w-]+/g,'');
-            		return $("<a>").attr("href", company_url).text(value);
-            	}, type: "text", width: 200, validate: "required", filterable: true },
-            { name: "ClientTier", title: "Client Tier", type: "text", width: 150 },
-            { name: "CMGSegmentName", title: "Segment Name", type: "text", width: 200 },
-            { name: "GlobalControlPoint", title: "Global Control Point", type: "text", width: 200 },
-            { name: "REVENUE FY14", title: "Revenue 2014", type: "number", width: 200, filtering: false },
-            { name: " Deposits_EOP_FY14", title: "Deposits 2014", type: "number", width: 200 , filtering: false},
-            { name: "ROE FY14", title: "ROE 2014", type: "number", width: 200, filtering: false },
-        ],
-        controller: {
-            data: gridData,
-            loadData: function (filter) {
-                return $.grep(this.data, function (item) {
-                    return (!filter.CMGUnmaskedName || item.CMGUnmaskedName.toLowerCase().indexOf(filter.CMGUnmaskedName.toLowerCase()) > -1) && (!filter.ClientTier || item.ClientTier.toLowerCase().indexOf(filter.ClientTier.toLowerCase()) > -1) && (!filter.CMGSegmentName || item.CMGSegmentName.toLowerCase().indexOf(filter.CMGSegmentName.toLowerCase()) > -1) && (!filter.GlobalControlPoint || item.GlobalControlPoint.toLowerCase().indexOf(filter.GlobalControlPoint.toLowerCase()) > -1);
-                });
-            },
-        }
-    });
+	$(document).ready(function(){
 
-    $("#jsGrid2015").jsGrid({
-        width: "100%",
- 
- 		filtering: true,
-        sorting: true,
-        paging: true,
-        autoload: true,
-        ignoreCase: true,
+		$("#jsGrid2014").jsGrid({
+			width: "100%",
+			height: "auto",
 
-        pageSize: 50,
-        pageButtonCount: 5,
- 
-        fields: [
-            { name: "CMGUnmaskedName", title: "Company Name",
-            	itemTemplate: function(value){
-            		var company_url = "/company/" + value.toLowerCase().replace(/ /g,'-').replace(/&/g, 'and').replace(/[^\w-]+/g,'');
-            		return $("<a>").attr("href", company_url).text(value);
-            	}, type: "text", width: 200, validate: "required", filterable: true },
-            { name: "ClientTier", title: "Client Tier", type: "text", width: 150 },
-            { name: "CMGSegmentName", title: "Segment Name", type: "text", width: 200 },
-            { name: "GlobalControlPoint", title: "Global Control Point", type: "text", width: 200 },
-            { name: "REVENYE FY15X", title: "Revenue 2015", type: "number", width: 200, filtering: false },
-            { name: " Deposits_EOP_FY15x", title: "Deposits 2015", type: "number", width: 200, filtering: false },
-            { name: "ROE FY15", title: "ROE 2015", type: "number", width: 200, filtering: false},
-        ],
-        controller: {
-            data: gridData,
-            loadData: function (filter) {
-                return $.grep(this.data, function (item) {
-                    return (!filter.CMGUnmaskedName || item.CMGUnmaskedName.toLowerCase().indexOf(filter.CMGUnmaskedName.toLowerCase()) > -1) && (!filter.ClientTier || item.ClientTier.toLowerCase().indexOf(filter.ClientTier.toLowerCase()) > -1) && (!filter.CMGSegmentName || item.CMGSegmentName.toLowerCase().indexOf(filter.CMGSegmentName.toLowerCase()) > -1) && (!filter.GlobalControlPoint || item.GlobalControlPoint.toLowerCase().indexOf(filter.GlobalControlPoint.toLowerCase()) > -1);
-                });
-            },
-        }
-    });
+			filtering: true,
+			sorting: true,
+			paging: true,
+			autoload: true,
+			ignoreCase: true,
+
+			pageSize: 50,
+			pageButtonCount: 5,
+	 
+	        fields: [
+	            { name: "CMGUnmaskedName", title: "Company Name",
+	            	itemTemplate: function(value){
+	            		var company_url = "/company/" + value.toLowerCase().replace(/ /g,'-').replace(/&/g, 'and').replace(/[^\w-]+/g,'');
+	            		return $("<a>").attr("href", company_url).text(value);
+	            	}, type: "text", width: 200, validate: "required", filterable: true },
+	            { name: "ClientTier", title: "Client Tier", type: "text", width: 150 },
+	            { name: "CMGSegmentName", title: "Segment Name", type: "text", width: 200 },
+	            { name: "GlobalControlPoint", title: "Global Control Point", type: "text", width: 200 },
+	            { name: "REVENUE FY14", title: "Revenue 2014", type: "number", width: 200, filtering: false },
+	            { name: " Deposits_EOP_FY14", title: "Deposits 2014", type: "number", width: 200 , filtering: false},
+	            { name: "ROE FY14", title: "ROE 2014", type: "number", width: 200, filtering: false },
+	        ],
+	        controller: {
+	        	loadData: function(filter){
+					var d = $.Deferred();
+					$.ajax({
+						type: "GET",
+						url: "/",
+						data: filter
+					}).done(function(result) {
+						d.resolve(result.data);
+					});
+					return d.promise();
+	        	}
+	        }
+	        // controller: {
+	        //     data: gridData,
+	        //     loadData: function (filter) {
+	        //         return $.grep(this.data, function (item) {
+	        //             return (!filter.CMGUnmaskedName || item.CMGUnmaskedName.toLowerCase().indexOf(filter.CMGUnmaskedName.toLowerCase()) > -1) && (!filter.ClientTier || item.ClientTier.toLowerCase().indexOf(filter.ClientTier.toLowerCase()) > -1) && (!filter.CMGSegmentName || item.CMGSegmentName.toLowerCase().indexOf(filter.CMGSegmentName.toLowerCase()) > -1) && (!filter.GlobalControlPoint || item.GlobalControlPoint.toLowerCase().indexOf(filter.GlobalControlPoint.toLowerCase()) > -1);
+	        //         });
+	        //     },
+	        // }
+	    });
+
+	   //  $("#jsGrid2015").jsGrid({
+	   //      width: "100%",
+	 
+	 		// filtering: true,
+	   //      sorting: true,
+	   //      paging: true,
+	   //      autoload: true,
+	   //      ignoreCase: true,
+
+	   //      pageSize: 50,
+	   //      pageButtonCount: 5,
+	 
+	   //      fields: [
+	   //          { name: "CMGUnmaskedName", title: "Company Name",
+	   //          	itemTemplate: function(value){
+	   //          		var company_url = "/company/" + value.toLowerCase().replace(/ /g,'-').replace(/&/g, 'and').replace(/[^\w-]+/g,'');
+	   //          		return $("<a>").attr("href", company_url).text(value);
+	   //          	}, type: "text", width: 200, validate: "required", filterable: true },
+	   //          { name: "ClientTier", title: "Client Tier", type: "text", width: 150 },
+	   //          { name: "CMGSegmentName", title: "Segment Name", type: "text", width: 200 },
+	   //          { name: "GlobalControlPoint", title: "Global Control Point", type: "text", width: 200 },
+	   //          { name: "REVENYE FY15X", title: "Revenue 2015", type: "number", width: 200, filtering: false },
+	   //          { name: " Deposits_EOP_FY15x", title: "Deposits 2015", type: "number", width: 200, filtering: false },
+	   //          { name: "ROE FY15", title: "ROE 2015", type: "number", width: 200, filtering: false},
+	   //      ],
+	   //      controller: {
+	   //          data: gridData,
+	   //          loadData: function (filter) {
+	   //              return $.grep(this.data, function (item) {
+	   //                  return (!filter.CMGUnmaskedName || item.CMGUnmaskedName.toLowerCase().indexOf(filter.CMGUnmaskedName.toLowerCase()) > -1) && (!filter.ClientTier || item.ClientTier.toLowerCase().indexOf(filter.ClientTier.toLowerCase()) > -1) && (!filter.CMGSegmentName || item.CMGSegmentName.toLowerCase().indexOf(filter.CMGSegmentName.toLowerCase()) > -1) && (!filter.GlobalControlPoint || item.GlobalControlPoint.toLowerCase().indexOf(filter.GlobalControlPoint.toLowerCase()) > -1);
+	   //              });
+	   //          },
+	   //      }
+	   //  });
+	})
 </script>
 {% endblock %}
