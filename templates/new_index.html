@@ -25,22 +25,22 @@
 	        ],
 			columns: [ 
 				{ field: 'recid', caption: 'ID', size: '50px', sortable: true, attr: 'align=center' },
-				{ field: "CMGUnmaskedName", caption: "Company Name", type: "text", size: '200px', validate: "required", filterable: true,
+				{ field: "CMGUnmaskedName", caption: "Company Name", type: "text", size: '200px', validate: "required", sortable: true, filterable: true,
 					render: function (record, index, column_index) {
 						var company_url = "/company/" + record.CMGUnmaskedName.toLowerCase().replace(/ /g,'-').replace(/&/g, 'and').replace(/[^\w-]+/g,'');
 	                    var html = '<a href="'+ company_url +'">'+ record.CMGUnmaskedName + '</a>';
 	                    return html;
 	                }
 				},
-	            { field: "ClientTier", caption: "Client Tier", type: "text", size: '150px' },
-	            { field: "CMGSegmentName", caption: "Segment Name", type: "text", size: '200px' },
-	            { field: "GlobalControlPoint", caption: "Global Control Point", type: "text", size: '200px' },
-	            { field: "REVENUE FY14", caption: "Revenue 2014", type: "number", size: '200px' },
-	            { field: "REVENYE FY15X", caption: "Revenue 2015", type: "number", size: '200px' },
-	            { field: " Deposits_EOP_FY14", caption: "Deposits 2014", type: "number", size: '200px' },
-	            { field: " Deposits_EOP_FY15x", caption: "Deposits 2015", type: "number", size: '200px' },
-	            { field: "ROE FY14", caption: "ROE 2014", type: "number", size: '200px' },
-	            { field: "ROE FY15", caption: "ROE 2015", type: "number", size: '200px' },
+	            { field: "ClientTier", caption: "Client Tier", type: "text", size: '150px', sortable: true },
+	            { field: "CMGSegmentName", caption: "Segment Name", type: "text", size: '200px', sortable: true },
+	            { field: "GlobalControlPoint", caption: "Global Control Point", type: "text", size: '200px', sortable: true },
+	            { field: "REVENUE FY14", caption: "Revenue 2014", type: "number", size: '200px', sortable: true },
+	            { field: "REVENYE FY15X", caption: "Revenue 2015", type: "number", size: '200px', sortable: true },
+	            { field: " Deposits_EOP_FY14", caption: "Deposits 2014", type: "number", size: '200px', sortable: true },
+	            { field: " Deposits_EOP_FY15x", caption: "Deposits 2015", type: "number", size: '200px', sortable: true },
+	            { field: "ROE FY14", caption: "ROE 2014", type: "number", size: '200px', sortable: true },
+	            { field: "ROE FY15", caption: "ROE 2015", type: "number", size: '200px', sortable: true },
 			],
 			sortData: [{ field: 'CMGUnmaskedName', direction: 'ASC' }],
 			records: gridData
